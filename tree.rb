@@ -121,13 +121,15 @@ class Tree
         end
     end
 
-    def inorder(current_node = @root )
+    def inorder(current_node = @root, output = [] )
         if current_node.nil?
             return
         end
-        inorder(current_node.left_child)
-        yield current_node if block_given?
-        inorder(current_node.right_child)
+        inorder(current_node.left_child, output)
+        output.push(current_node)
+        inorder(current_node.right_child, output)
+
+        return output
     end
 
     def preorder(current_node = @root)
